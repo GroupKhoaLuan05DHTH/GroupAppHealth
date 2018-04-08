@@ -1,0 +1,11 @@
+﻿thống nhất các chức năng của app.
+chọn thuật toán.
+huyết áp chiều cao cân nặng nhiệt tim màu sắc da.
+input bản câu hỏi khám sức khỏe của lái xe.
+làm modul các chức năng và thiết kế database.
+tham khảo phần mềm 
+xử lý camera.
+tích hợp trí tuệ nhân tạo.
+LTLHeath
+nhẹ
+nhanh
