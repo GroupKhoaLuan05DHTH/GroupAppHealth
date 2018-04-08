@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AppHealth</string>
+    <string name="login_btn_sign_in">SIGN IN</string>
+    <string name="login_lb_or">OR</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+</resources>

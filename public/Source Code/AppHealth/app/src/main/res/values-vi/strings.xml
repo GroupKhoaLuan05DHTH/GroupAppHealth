@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ứng Dụng Sức Khỏe</string>
+    <string name="login_btn_sign_in">ĐĂNG NHẬP</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Mật Khẩu</string>
+</resources>
