@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nav_header_height"
+    android:background="@color/colorPrimary"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <com.facebook.login.widget.ProfilePictureView
+        android:id="@+id/image_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/label_margin"
+        android:visibility="visible">
+
+    </com.facebook.login.widget.ProfilePictureView>
+
+    <ImageView
+        android:id="@+id/image_google"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/label_margin"
+        android:gravity="center"
+        android:text="Anh Thịnh"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/colorWhite"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+</LinearLayout>

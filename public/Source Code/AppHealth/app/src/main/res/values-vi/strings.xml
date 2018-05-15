@@ -2,6 +2,45 @@
 <resources>
     <string name="app_name">Ứng Dụng Sức Khỏe</string>
     <string name="login_btn_sign_in">ĐĂNG NHẬP</string>
+    <string name="login_btn_sign_up">ĐĂNG KÝ</string>
+    <!--title -->
+    <string name="title_sign_in">Đăng Nhập</string>
+    <string name="title_sign_up">Đăng Ký</string>
+    <string name="title_contact_activity">Liên Hệ</string>
+    <string name="title_marker_contact">Trường Đại Học Công Nghiệp Thực Phẩm TP.HCM</string>
+    <string name="title_about_activity">Giới Thiệu</string>
+    <string name="title_medical_profile_activity">Hồ Sơ Bệnh Án</string>
+    <string name="title_medical_knowledge">Kiến Thức Y Khoa</string>
+
+    <string name="medical_profile">Hồ Sơ Bệnh Án</string>
+    <string name="list_clinics">D.Sách Phòng Khám</string>
+    <string name="medical_knowledge">Kiến Thức Y Khoa</string>
+    <string name="history">Lịch Sử</string>
+
     <string name="hint_email">Email</string>
     <string name="hint_password">Mật Khẩu</string>
+    <string name="hint_your_name">Tên Của Bạn</string>
+    <string name="forgot_my_password">Quên mật khẩu?</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+
+    <string name="confirm_logout">Bạn có muốn đăng xuất không?</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_cancel">HỦY</string>
+    <!-- About screen-->
+    <string name="about_lb_build_version">Build version</string>
+    <string name="about_lb_version">Version: </string>
+    <!--Menu -->
+    <string name="menu_home">Trang Chủ</string>
+    <string name="menu_file">Hồ Sơ Bệnh Án</string>
+    <string name="menu_clinic">Danh Sách Phòng Khám</string>
+    <string name="menu_medical_knowledge">Kiến Thức Y Khoa</string>
+    <string name="menu_sign_out">Đăng Xuất</string>
+    <string name="menu_settings">Cài Đặt</string>
+    <string name="menu_history">Lịch Sử</string>
+    <string name="menu_about">Giới Thiệu</string>
+    <string name="menu_support">Hỗ Trợ</string>
+    <string name="menu_contact">Liên Hệ</string>
+    <string name="menu_function">Chức Năng</string>
+    <string name="menu_system">Hệ Thống</string>
 </resources>

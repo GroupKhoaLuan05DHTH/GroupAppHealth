@@ -3,14 +3,22 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
+    <color name="LinePrimaryLight">#0097A7</color>
     <!--<color name="colorPrimary">#3F51B5</color>-->
     <!--<color name="colorPrimaryDark">#303F9F</color>-->
     <!--<color name="colorAccent">#FF4081</color>-->
     <color name="colorLine">#BDBDBD</color>
-
+    <color name="colorWaiting">#f39c12</color>
     <color name="black_overlay">#66000000</color>
     <color name="colorWhite">#ffffff</color>
     <color name="default_background_color">#FAFAFA</color>
-
+    <color name="text_alpha_body">@color/colorAccent</color>
+    <color name="text_body">@android:color/primary_text_light</color>
+    <color name="text_title">#046922</color>
+    <color name="text_content">#0fdaa4</color>
+    <color name="background_tab">#e0e0e0</color>
+    <color name="colorGrey">#e0e0e0</color>
+    <color name="divider">#B6B6B6</color>
+    <color name="color_background_default">#0f7b77</color>
+    <color name="color_background">#41c865</color>
 </resources>

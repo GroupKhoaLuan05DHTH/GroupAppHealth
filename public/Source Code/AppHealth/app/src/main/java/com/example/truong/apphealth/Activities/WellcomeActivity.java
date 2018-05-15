@@ -14,6 +14,8 @@ import butterknife.ButterKnife;
 public class WellcomeActivity extends AppCompatActivity {
     @BindView(R.id.welcome_btn_sign_in)
     Button mButtonSignIn;
+    @BindView(R.id.welcome_btn_sign_up)
+    Button mButtonSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +29,20 @@ public class WellcomeActivity extends AppCompatActivity {
                 goToLoginScreen();
             }
         });
+        mButtonSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToSignUpScreen();
+            }
+        });
     }
 
     private void goToLoginScreen() {
         startActivity(new Intent(this, LoginActivity.class));
-        finish();
+    }
+
+    private void goToSignUpScreen() {
+        startActivity(new Intent(this, SignUpActivity.class));
     }
 
 }

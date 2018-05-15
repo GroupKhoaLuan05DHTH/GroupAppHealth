@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "932857094236",
+    "firebase_url": "https://leafy-sanctuary-204016.firebaseio.com",
+    "project_id": "leafy-sanctuary-204016",
+    "storage_bucket": "leafy-sanctuary-204016.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:932857094236:android:6d913843776f145c",
+        "android_client_info": {
+          "package_name": "com.example.truong.apphealth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "932857094236-htjj5pc73ecg2u06pvjqjn7d8gu2b2tv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.truong.apphealth",
+            "certificate_hash": "1ce971fa821b366399b398bccd8eb8379647329e"
+          }
+        },
+        {
+          "client_id": "932857094236-d5vavn2acdvojth5hb8o1lnn7kn3jb0e.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "932857094236-ldn5s5c3m6asuicor2jlpkriimms5nmc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6r0L70GWfeGDUv5kdw4SLfqJCKa4f47g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "932857094236-d5vavn2acdvojth5hb8o1lnn7kn3jb0e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

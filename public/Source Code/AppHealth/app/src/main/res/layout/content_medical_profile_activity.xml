@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrey">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardviewTile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/label_margin"
+        android:layout_marginRight="@dimen/label_margin"
+        android:layout_marginTop="@dimen/label_margin"
+        android:elevation="6dp"
+        app:cardCornerRadius="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/label_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="10/05/2018"
+                android:textColor="@color/text_body"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/label_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tiểu Sử Bản Thân"
+                    android:textColor="@color/color_background_default"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text_index"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="17"
+                        android:textColor="@color/text_body"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_total_index"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/label_margin"
+                        android:gravity="right"
+                        android:text="/24"
+                        android:textColor="@color/text_body"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progressbar_index"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/label_margin"
+                android:max="100"
+                android:progress="45" />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardviewContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardviewTile"
+        android:layout_marginLeft="@dimen/label_margin"
+        android:layout_marginRight="@dimen/label_margin"
+        android:layout_marginTop="@dimen/label_margin"
+        android:elevation="6dp"
+        app:cardCornerRadius="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/label_margin"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/label_margin"
+                android:layout_marginRight="@dimen/label_margin"
+                android:background="@drawable/bg_color"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Bệnh Tiêu Hóa"
+                    android:textColor="@color/text_body"
+                    android:textSize="@dimen/text_18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/label_margin"
+                    android:layout_marginTop="@dimen/label_margin"
+                    android:gravity="center"
+                    android:text="Bạn có triệu chứng nào của bệnh tiêu hóa?"
+                    android:textColor="@color/text_body"
+                    android:textSize="@dimen/text_16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/label_margin"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/label_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button"
+                    android:text="Có"
+                    android:textSize="@dimen/text_18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/label_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_button"
+                    android:text="Không"
+                    android:textSize="@dimen/text_18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_back"
+        android:layout_width="@dimen/fab_size"
+        android:layout_height="@dimen/fab_size"
+        android:layout_gravity="bottom|left"
+        android:layout_marginBottom="@dimen/label_margin"
+        android:layout_marginLeft="@dimen/label_margin"
+        android:layout_alignParentBottom="true"
+        android:scaleType="center"
+        android:src="@drawable/ic_back" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/fab_next"
+        android:layout_width="@dimen/fab_size"
+        android:layout_height="@dimen/fab_size"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="@dimen/label_margin"
+        android:layout_marginRight="@dimen/label_margin"
+        android:scaleType="center"
+        android:src="@drawable/ic_next" />
+
+
+</RelativeLayout>
