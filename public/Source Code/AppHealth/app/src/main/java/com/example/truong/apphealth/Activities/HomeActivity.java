@@ -2,6 +2,7 @@ package com.example.truong.apphealth.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -10,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,13 +21,30 @@ import android.widget.TextView;
 import com.example.truong.apphealth.Activities.HeartRate.HeartRateMainActivity;
 import com.example.truong.apphealth.Instance;
 import com.example.truong.apphealth.R;
+import com.example.truong.apphealth.Server.ApiInterface;
+import com.example.truong.apphealth.Server.Model.ListAccount;
+import com.example.truong.apphealth.Server.RetrofitClient;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.ProfilePictureView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     @BindView(R.id.toolbar)
@@ -42,6 +61,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     LinearLayout mLayoutHistory;
     NavigationView navigationView;
     public FirebaseAuth firebaseAuth;
+    protected ApiInterface mApiService = RetrofitClient.getApiClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +74,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         mLayoutListClinics.setOnClickListener(this);
         mLayoutMedicalKnowledge.setOnClickListener(this);
         mLayoutHistory.setOnClickListener(this);
+//        if (Instance.profile.size() != 0) {
+//            apigetProfile(Instance.profile.get(0).ID);
+//        } else {
+//        }
     }
+
 
     @Override
     protected void onStart() {
@@ -71,6 +96,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         setUpNavView();
         bindDataNavUserInfo();
+
     }
 
     private void setUpNavView() {
@@ -100,8 +126,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 confirmSignoutDialog();
                 break;
             case R.id.nav_profile:
+                startActivity(new Intent(this, SettingActivity.class));
                 break;
             case R.id.nav_list_clinic:
+                startActivity(new Intent(this, ListClinicsActivity.class));
                 break;
             case R.id.nav_medical_knowledge:
                 startActivity(new Intent(this, MedicalKnowledgeActivity.class));
@@ -118,6 +146,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_heartReat:
                 startActivity(new Intent(this, HeartRateMainActivity.class));
+                break;
+
 
         }
         return false;
@@ -145,6 +175,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Intent i = new Intent(this, WellcomeActivity.class);
         LoginManager.getInstance().logOut();
         firebaseAuth.signOut();
+        Instance.profile_id = "";
+        Instance.profile.clear();
         startActivity(i);
         finish();
     }
@@ -153,21 +185,45 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         View headerView = mNavView.getHeaderView(0);
         ProfilePictureView profilePictureView = headerView.findViewById(R.id.image_profile);
         ImageView imageView = headerView.findViewById(R.id.image_google);
-        if (Instance.accounts.size() != 0) {
-            ((TextView) headerView.findViewById(R.id.text_name)).setText(Instance.accounts.get(0).first_name);
+        TextView textName = headerView.findViewById(R.id.text_name);
+        if (Instance.profile.size() == 0) {
+            textName.setText(Instance.first_name);
         } else {
-            ((TextView) headerView.findViewById(R.id.text_name)).setText(Instance.first_name);
-            if (!Instance.profile_id.equals("")) {
-                profilePictureView.setVisibility(View.VISIBLE);
-                imageView.setVisibility(View.GONE);
-                profilePictureView.setProfileId(Instance.profile_id);
-            } else {
-                profilePictureView.setVisibility(View.GONE);
-                imageView.setVisibility(View.VISIBLE);
-                Picasso.with(this).load(Instance.photoUrl).resize(70, 70).centerCrop().into(imageView);
-            }
+            textName.setText(Instance.profile.get(0).Name);
+        }
+        if (!Instance.profile_id.equals("")) {
+            profilePictureView.setVisibility(View.VISIBLE);
+            imageView.setVisibility(View.GONE);
+            profilePictureView.setProfileId(Instance.profile_id);
+        } else {
+            profilePictureView.setVisibility(View.GONE);
+            imageView.setVisibility(View.VISIBLE);
+            Picasso.with(this).load(Instance.photoUrl).resize(120, 120).centerCrop().into(imageView);
         }
 
+
+    }
+
+    private void apigetProfile(String AccountID) {
+        Call<ListAccount> call = mApiService.getProfile(AccountID);
+        call.enqueue(new Callback<ListAccount>() {
+            @Override
+            public void onResponse(Response<ListAccount> response, Retrofit retrofit) {
+                Instance.getProfile = response.body().result;
+                if (Instance.getProfile != null) {
+                    String address =Instance.getProfile.get(0).Address.replace(' ', '+');
+                    new getListAsysncTask().execute("http://maps.google.com/maps/api/geocode/json?address=" + address);
+
+                } else {
+                    Log.d("BBB", "null");
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -177,12 +233,59 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, MedicalProfileActivity.class));
                 break;
             case R.id.layout_list_clinics:
+                startActivity(new Intent(this, ListClinicsActivity.class));
                 break;
             case R.id.layout_medical_knowledge:
                 startActivity(new Intent(this, MedicalKnowledgeActivity.class));
                 break;
             case R.id.layout_history:
                 break;
+        }
+    }
+
+    private class getListAsysncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            StringBuilder content = new StringBuilder();
+            try {
+                URL url = new URL(strings[0]);
+                InputStreamReader inputStreamReader = new InputStreamReader(url.openConnection().getInputStream());
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null) {
+                    content.append(line);
+                }
+                bufferedReader.close();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return content.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                JSONArray jsonArray = jsonObject.getJSONArray("results");
+                Log.d("BBB", "json array" + jsonArray.toString());
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject object = jsonArray.getJSONObject(i);
+                    String geometry = object.getString("geometry");
+                    JSONObject object1 = new JSONObject(geometry);
+                    JSONObject object2 = object1.getJSONObject("location");
+                    Instance.lat = object2.getString("lat");
+                    Instance.lng = object2.getString("lng");
+
+                    Log.d("BBB", "lat " + Instance.lat + "  lng " + Instance.lng);
+
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

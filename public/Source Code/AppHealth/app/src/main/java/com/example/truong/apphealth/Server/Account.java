@@ -5,7 +5,16 @@ package com.example.truong.apphealth.Server;
  */
 
 public class Account {
-    public String email="";
-    public String password="";
-    public String first_name="";
+    public String ID="";
+    public String Email="";
+    public String Status="";
+    public String AccountType="";
+    public String Name="";
+    public String Gender="";
+    public String Weight="";
+    public String Height="";
+    public String DoB="";
+    public String Address="";
+    public String PhoneNumber="";
+    public String Job="";
 }

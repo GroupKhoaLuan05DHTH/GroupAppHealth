@@ -11,9 +11,12 @@
     <string name="title_about_activity">Giới Thiệu</string>
     <string name="title_medical_profile_activity">Hồ Sơ Bệnh Án</string>
     <string name="title_medical_knowledge">Kiến Thức Y Khoa</string>
+    <string name="title_setting_activity">Cài Đặt</string>
+    <string name="title_list_clinics">Danh Sách Phòng Khám</string>
+    <string name="title_update_profile">Cập Nhập Thông Tin</string>
 
     <string name="medical_profile">Hồ Sơ Bệnh Án</string>
-    <string name="list_clinics">D.Sách Phòng Khám</string>
+    <string name="list_clinics">D.S Phòng Khám</string>
     <string name="medical_knowledge">Kiến Thức Y Khoa</string>
     <string name="history">Lịch Sử</string>
 
@@ -43,4 +46,16 @@
     <string name="menu_contact">Liên Hệ</string>
     <string name="menu_function">Chức Năng</string>
     <string name="menu_system">Hệ Thống</string>
+
+    <!--Setting Activity -->
+    <string name="settings_btn_save">Lưu</string>
+    <string name="please_wait">Đang tải dữ liệu. Xin chờ...</string>
+    <string name="hint_name">Tên: </string>
+    <string name="hint_mobile">Số Điện Thoại:</string>
+    <string name="person">Cá Nhân</string>
+    <string name="hint_address">Địa Chỉ: </string>
+    <string name="hint_weight">Cân Nặng(kg): </string>
+    <string name="hint_height">Chiều Cao(cm): </string>
+    <string name="hint_bmi">Chỉ Số BMI: </string>
+    <string name="hint_age">Số Tuổi: </string>
 </resources>

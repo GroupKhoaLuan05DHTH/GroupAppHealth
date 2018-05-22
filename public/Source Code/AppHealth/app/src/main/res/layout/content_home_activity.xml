@@ -30,7 +30,9 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:weightSum="2">
 
@@ -41,19 +43,20 @@
                 android:layout_gravity="left"
                 android:layout_marginRight="@dimen/label_margin"
                 android:layout_weight="1"
-                android:background="@color/LinePrimaryLight"
+                android:background="@drawable/bg_home"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_height="140dp"
                     android:layout_gravity="center"
                     android:src="@drawable/img_medical_profile" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:gravity="center"
                     android:text="@string/medical_profile"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
@@ -69,19 +72,20 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="@dimen/label_margin"
                 android:layout_weight="1"
-                android:background="@color/LinePrimaryLight"
+                android:background="@drawable/bg_home"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_height="140dp"
                     android:layout_gravity="center"
                     android:src="@drawable/img_list_clinics" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/label_margin"
                     android:gravity="center"
                     android:text="@string/list_clinics"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
@@ -105,19 +109,21 @@
                 android:layout_gravity="left"
                 android:layout_marginRight="@dimen/label_margin"
                 android:layout_weight="1"
-                android:background="@color/LinePrimaryLight"
+                android:background="@drawable/bg_home"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_height="140dp"
                     android:layout_gravity="center"
                     android:src="@drawable/img_medical_knowledge" />
 
                 <TextView
                     android:layout_width="match_parent"
+
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/label_margin"
                     android:gravity="center"
                     android:text="@string/medical_knowledge"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"
@@ -133,19 +139,20 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="@dimen/label_margin"
                 android:layout_weight="1"
-                android:background="@color/LinePrimaryLight"
+                android:background="@drawable/bg_home"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_height="140dp"
                     android:layout_gravity="center"
                     android:src="@drawable/img_history" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/label_margin"
                     android:gravity="center"
                     android:text="@string/history"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button"

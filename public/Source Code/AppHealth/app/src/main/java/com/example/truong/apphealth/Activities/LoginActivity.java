@@ -1,6 +1,8 @@
 package com.example.truong.apphealth.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -15,7 +17,10 @@ import android.widget.Toast;
 
 import com.example.truong.apphealth.Instance;
 import com.example.truong.apphealth.R;
-import com.example.truong.apphealth.Server.Account;
+import com.example.truong.apphealth.Server.ApiInterface;
+import com.example.truong.apphealth.Server.Model.ListAccount;
+import com.example.truong.apphealth.Server.Model.ListQuestion;
+import com.example.truong.apphealth.Server.RetrofitClient;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -42,15 +47,23 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -73,13 +86,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.sign_in_button)
     SignInButton signInButton;
 
-    private List<Account> accounts = new ArrayList<>();
+
     CallbackManager callbackManager;
     String name = "", id = "";
     public FirebaseAuth firebaseAuth;
 
     public GoogleApiClient googleApiClient;
+    protected ApiInterface mApiService = RetrofitClient.getApiClient();
 
+    protected ProgressDialog progressDialog;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,11 +102,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         initialize();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getResources().getString(R.string.please_wait));
+        progressDialog.setCancelable(false);
         setUpLoginFacebook();
         setUpLoginGoogle();
         mButtonSignIn.setOnClickListener(this);
-
-
     }
 
     private void setUpLoginGoogle() {
@@ -134,7 +150,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         try {
                             Instance.first_name = object.getString("name");
                             Instance.profile_id = Profile.getCurrentProfile().getId();
-                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                            Log.d("BBB", "id face: " + Instance.profile_id);
+                            apiGetQuestionListFB();
+//                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
 //                            profilePictureView.setProfileId(Profile.getCurrentProfile().getId());
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -199,8 +217,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                             Instance.first_name = firebaseUser.getDisplayName().toString();
                             Instance.email = firebaseUser.getEmail().toString();
+                            Log.d("BBB", "id google " + firebaseUser.getUid());
                             Instance.photoUrl = firebaseUser.getPhotoUrl();
-                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                            apiGetQuestionListFB();
+//                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
 
 
                         } else {
@@ -234,21 +254,167 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    private void apiLogin(String email, String password) {
+        progressDialog.show();
+        Call<ListAccount> call = mApiService.login(email, password);
+        call.enqueue(new Callback<ListAccount>() {
+            @Override
+            public void onResponse(Response<ListAccount> response, Retrofit retrofit) {
+                if (response.isSuccess()) {
+                    Instance.profile = response.body().result;
+                    Log.d("BBB", "Size list" + Instance.profile.size());
+                    if (Instance.profile.size() != 0) {
+                        apigetProfile(Instance.profile.get(0).ID);
+                    }
+                } else {
+                    progressDialog.dismiss();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                progressDialog.dismiss();
+
+            }
+        });
+    }
+
+    private void apiGetQuestionList() {
+        Call<ListQuestion> call = mApiService.getListQuestion();
+        call.enqueue(new Callback<ListQuestion>() {
+            @Override
+            public void onResponse(Response<ListQuestion> response, Retrofit retrofit) {
+                if (response.isSuccess()) {
+                    Instance.questionList = response.body().result;
+                    if (Instance.profile.size() == 0) {
+                        Toast.makeText(LoginActivity.this, "Sai email hoặc mật khẩu", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Login is Success", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                    }
+                    Log.d("BBB", "size list question" + Instance.questionList.size());
+                } else {
+                }
+                progressDialog.dismiss();
+
+            }
+
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.d("BBB", "Loi " + t.getMessage());
+            }
+        });
+    }
+
+    private void apiGetQuestionListFB() {
+        Call<ListQuestion> call = mApiService.getListQuestion();
+        call.enqueue(new Callback<ListQuestion>() {
+            @Override
+            public void onResponse(Response<ListQuestion> response, Retrofit retrofit) {
+                if (response.isSuccess()) {
+                    Instance.questionList = response.body().result;
+
+                    Toast.makeText(LoginActivity.this, "Login is Success", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+
+                    Log.d("BBB", "size list question" + Instance.questionList.size());
+                } else {
+                }
+                progressDialog.dismiss();
+
+            }
+
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.d("BBB", "Loi " + t.getMessage());
+            }
+        });
+    }
+
+    private void apigetProfile(String AccountID) {
+        Call<ListAccount> call = mApiService.getProfile(AccountID);
+        call.enqueue(new Callback<ListAccount>() {
+            @Override
+            public void onResponse(Response<ListAccount> response, Retrofit retrofit) {
+                Instance.getProfile = response.body().result;
+                if (Instance.getProfile != null) {
+                    String address = Instance.getProfile.get(0).Address.replace(' ', '+');
+                    new getListAsysncTask().execute("http://maps.google.com/maps/api/geocode/json?address=" + address);
+
+                } else {
+                    Log.d("BBB", "null");
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
+    }
+
+    private class getListAsysncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            StringBuilder content = new StringBuilder();
+            try {
+                URL url = new URL(strings[0]);
+                InputStreamReader inputStreamReader = new InputStreamReader(url.openConnection().getInputStream());
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null) {
+                    content.append(line);
+                }
+                bufferedReader.close();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return content.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                JSONArray jsonArray = jsonObject.getJSONArray("results");
+                Log.d("BBB", "json array" + jsonArray.toString());
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject object = jsonArray.getJSONObject(i);
+                    String geometry = object.getString("geometry");
+                    JSONObject object1 = new JSONObject(geometry);
+                    JSONObject object2 = object1.getJSONObject("location");
+                    Instance.lat = object2.getString("lat");
+                    Instance.lng = object2.getString("lng");
+
+                    Log.d("BBB", "lat " + Instance.lat + "  lng " + Instance.lng);
+
+
+                }
+                if (!Instance.lat.equals("") || !Instance.lng.equals("")) {
+                    apiGetQuestionList();
+                } else {
+                    String address = Instance.getProfile.get(0).Address.replace(' ', '+');
+                    new getListAsysncTask().execute("http://maps.google.com/maps/api/geocode/json?address=" + address);
+
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private void checkLogin() {
         if (inputEmail.getText().length() == 0 || inputPassword.getText().length() == 0) {
             Toast.makeText(this, "Bạn cần nhập đủ thông tin", Toast.LENGTH_SHORT).show();
         } else {
-            for (int i = 0; i < Instance.accounts.size(); i++) {
-                if (inputEmail.getText().toString().equals(Instance.accounts.get(i).email) &&
-                        inputPassword.getText().toString().equals(Instance.accounts.get(i).password)) {
-                    startActivity(new Intent(this, HomeActivity.class));
-                    Toast.makeText(this, "Đăng Nhập Thành Công", Toast.LENGTH_SHORT).show();
-                    Log.d("BBB", Instance.accounts.get(i).first_name);
-
-                } else {
-                    Toast.makeText(this, "Sai tên đăng nhập hoặc mật khẩu", Toast.LENGTH_SHORT).show();
-                }
-            }
+            apiLogin(inputEmail.getText().toString(), inputPassword.getText().toString());
         }
     }
 

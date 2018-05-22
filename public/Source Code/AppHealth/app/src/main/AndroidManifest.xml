@@ -29,6 +29,7 @@
     <uses-feature
         android:name="android.hardware.camera.flash"
         android:required="false" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -88,7 +89,22 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.HeartRate.HeartRateActivity" />
-        <activity android:name=".Activities.HeartRate.HeartRateMainActivity"></activity>
+        <activity android:name=".Activities.HeartRate.HeartRateMainActivity" />
+        <activity
+            android:name=".Activities.SettingActivity"
+            android:label="@string/title_setting_activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.ListClinicsActivity"
+            android:label="@string/title_list_clinics"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.RegisterActivity"
+            android:label="@string/title_update_profile"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

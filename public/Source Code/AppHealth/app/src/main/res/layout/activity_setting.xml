@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.truong.apphealth.Activities.SettingActivity">
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite">
+
+            <!-- Header - App bar-->
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/colorPrimary"
+                android:theme="@style/AppTheme.AppBarOverlay">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"
+                    app:theme="@style/AppTheme.AppBarOverlay" />
+            </android.support.design.widget.AppBarLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/toolbar_layout">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/toolbar_layout">
+
+                    <LinearLayout
+                        android:id="@+id/person_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:gravity="bottom">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="@dimen/activity_vertical_margin"
+                            android:gravity="center|left"
+                            android:text="@string/person"
+                            android:textColor="#000000"
+                            android:textSize="20dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/person_layout"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:layout_marginTop="@dimen/label_margin"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/input_layout_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/input_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:enabled="true"
+                                android:hint="@string/hint_name"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/linearLayout"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/input_layout_mobile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/input_mobile"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:enabled="true"
+                                android:hint="@string/hint_mobile"
+                                android:inputType="phone" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/label_margin"
+                            android:layout_weight="5"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Ngày Sinh"
+                                android:textSize="@dimen/text_18sp" />
+
+                            <TextView
+                                android:gravity="center"
+                                android:id="@+id/text_DoB"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="25/05/1998"
+                                android:textSize="@dimen/text_18sp" />
+
+                            <ImageView
+                                android:id="@+id/imgCalendar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:src="@drawable/ic_calendar" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/linearLayout2"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/linearLayout3"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:layout_marginTop="@dimen/label_margin"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="Giới Tính"
+                            android:textSize="17sp" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_weight="2">
+
+                            <RadioGroup
+                                android:orientation="horizontal"
+                                android:id="@+id/group_radio"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <RadioButton
+
+                                    android:checked="true"
+                                    android:id="@+id/radioMale"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Nam"
+                                    android:textSize="17sp" />
+
+                                <RadioButton
+                                    android:id="@+id/radioFemale"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Nữ"
+                                    android:textSize="17sp" />
+                            </RadioGroup>
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/linearLayout4"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:layout_marginTop="@dimen/label_margin"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/input_weight"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:enabled="true"
+                                android:hint="@string/hint_weight"
+                                android:inputType="text" />
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/linearLayout5"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:layout_marginTop="@dimen/label_margin"
+                        android:orientation="vertical">
+
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/input_height"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:enabled="true"
+                                android:hint="@string/hint_height"
+                                android:inputType="text" />
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/linearLayout6"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:layout_marginTop="@dimen/label_margin"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/input_address"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:enabled="true"
+                                android:hint="@string/hint_address"
+                                android:inputType="text" />
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_save"
+                        style="@style/App.Button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/linearLayout7"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_marginLeft="@dimen/activity_vertical_margin"
+                        android:layout_marginRight="@dimen/activity_vertical_margin"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:gravity="center"
+                        android:text="@string/settings_btn_save" />
+
+                </RelativeLayout>
+            </ScrollView>
+        </RelativeLayout>
+    </android.support.v4.widget.DrawerLayout>
+
+    <com.facebook.login.widget.ProfilePictureView
+        android:id="@+id/profile_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:visibility="visible"
+        app:layout_anchor="@id/toolbar_layout"
+        app:layout_anchorGravity="bottom|center" />
+
+    <ImageView
+        android:id="@+id/image_profile"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_profile_default"
+        android:visibility="gone"
+        app:layout_anchor="@id/toolbar_layout"
+        app:layout_anchorGravity="bottom|center" />
+</android.support.design.widget.CoordinatorLayout>

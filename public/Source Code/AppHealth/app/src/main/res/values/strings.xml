@@ -12,6 +12,9 @@
     <string name="title_about_activity">About</string>
     <string name="title_medical_profile_activity">Medical Profile</string>
     <string name="title_medical_knowledge">Medical Knowledge</string>
+    <string name="title_setting_activity">Setting Activity</string>
+    <string name="title_list_clinics">List Clinics</string>
+    <string name="title_update_profile">Update Profile</string>
 
     <string name="medical_profile">Medical Profile</string>
     <string name="list_clinics">List Clinics</string>
@@ -43,4 +46,16 @@
     <string name="menu_contact">Contact</string>
     <string name="menu_function">Function</string>
     <string name="menu_system">System</string>
+    <string name="please_wait">Loading data. Please wait…</string>
+
+    <!--Setting Activity -->
+    <string name="settings_btn_save">Save</string>
+    <string name="hint_name">Full name</string>
+    <string name="hint_mobile">Mobile</string>
+    <string name="person">Person</string>
+    <string name="hint_address">Address: </string>
+    <string name="hint_weight">Weight(kg): </string>
+    <string name="hint_height">Height(cm): </string>
+    <string name="hint_bmi">BMI: </string>
+    <string name="hint_age">Age: </string>
 </resources>

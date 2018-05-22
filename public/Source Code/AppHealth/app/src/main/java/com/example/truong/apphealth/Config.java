@@ -10,4 +10,6 @@ public class Config {
     public static final int GOOGLE_MAP_ZOOM = 15;
     public static final String HOME_ADDRESS="140 Lê Trọng Tấn, Phường Tây Thạnh, Quận Tân Phú, TP.HCM";
     public static final String HOME_PHONE="01627399475";
+    public static final String KG="kg";
+    public static final String CM="cm";
 }
