@@ -1,5 +1,6 @@
 package com.example.truong.apphealth.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -75,8 +76,8 @@ public class MedicalProfileActivity extends AppCompatActivity {
     Button mButtonStart;
     private RecyclerView.LayoutManager layoutManager;
     protected ApiInterface mApiService = RetrofitClient.getApiClient();
-    private String historyId = "";
     private String answerQuestion = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,15 +85,12 @@ public class MedicalProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_medical_profile);
         ButterKnife.bind(this);
         initialize();
-//        apiCreateHistory(Instance.profile.get(0).ID);
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date today = Calendar.getInstance().getTime();
         mTextDate.setText(dateFormat.format(today));
         setUpdata();
         setUpRecyclerViewAnswer();
         mProgressbarInder.setMax(Instance.questionList.size());
-
-
     }
 
     private void setUpRecyclerViewAnswer() {
@@ -109,11 +107,6 @@ public class MedicalProfileActivity extends AppCompatActivity {
 
     private void setUpdata() {
         mTextIndex.setText("1");
-//        if (i < 0) {
-//            mFABBack.setVisibility(View.INVISIBLE);
-//            linearLayoutQuestion.setVisibility(View.GONE);
-//            setUpInfo();
-//        }
         mFABBack.setVisibility(View.INVISIBLE);
         mProgressbarInder.setProgress(1);
         mTextTotalIndex.setText(String.valueOf("/" + Instance.questionList.size()));
@@ -147,7 +140,9 @@ public class MedicalProfileActivity extends AppCompatActivity {
                     } else {
                         mFABBack.setVisibility(View.VISIBLE);
                     }
+
                     if (i == Instance.questionList.size() - 1) {
+                        apiCreateHistory(Instance.profile.get(0).ID);
                         mFABNext.setVisibility(View.INVISIBLE);
                         mButtonStart.setVisibility(View.VISIBLE);
                     } else {
@@ -203,7 +198,7 @@ public class MedicalProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 answerQuestion = answerQuestion + "," + Instance.QuestionOptionID;
                 Log.d("BBB", "answerQuestion: " + answerQuestion);
-                apiAnswerQuestion(historyId, answerQuestion);
+                apiAnswerQuestion( Instance.historyId, answerQuestion);
             }
         });
 
@@ -240,6 +235,11 @@ public class MedicalProfileActivity extends AppCompatActivity {
                 if (response.isSuccess()) {
                     boolean check = response.body().result;
                     Log.d("BBB", "onResponse: " + check);
+                    if (check) {
+                        startActivity(new Intent(MedicalProfileActivity.this, ResultActivity.class));
+                    } else {
+
+                    }
                 } else {
 
                 }
@@ -285,8 +285,8 @@ public class MedicalProfileActivity extends AppCompatActivity {
             @Override
             public void onResponse(Response<ResultHistory> response, Retrofit retrofit) {
                 if (response.isSuccess()) {
-                    historyId = response.body().result.historyId;
-                    Log.d("BBB", "History id " + historyId);
+               Instance.historyId = response.body().result.historyId;
+                    Log.d("BBB", "History id " +  Instance.historyId);
                 } else {
                     Log.d("BBB", "sai history");
                 }

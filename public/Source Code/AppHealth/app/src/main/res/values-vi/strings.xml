@@ -14,6 +14,9 @@
     <string name="title_setting_activity">Cài Đặt</string>
     <string name="title_list_clinics">Danh Sách Phòng Khám</string>
     <string name="title_update_profile">Cập Nhập Thông Tin</string>
+    <string name="title_history_activity">Lịch Sử</string>
+    <string name="title_history_detail_activity">Chi Tiết Lịch Sử</string>
+    <string name="title_result_activity">Kết Quả</string>
 
     <string name="medical_profile">Hồ Sơ Bệnh Án</string>
     <string name="list_clinics">D.S Phòng Khám</string>

@@ -4,6 +4,8 @@ import android.net.Uri;
 
 import com.example.truong.apphealth.Server.Account;
 import com.example.truong.apphealth.Server.Question;
+import com.example.truong.apphealth.Server.QuestionOption;
+import com.example.truong.apphealth.Server.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +24,12 @@ public class Instance {
     public static Uri photoUrl;
     public static String gender = "1";
     public static List<Question> questionList = new ArrayList<>();
-    public static String lat="";
-    public static String lng="";
-    public static String QuestionOptionID="";
+    public static String lat = "";
+    public static String lng = "";
+    public static String QuestionOptionID = "";
+    public static List<Result> resultList = new ArrayList<>();
+    public static List<QuestionOption> questionOptions=new ArrayList<>();
+    public static String historyId="";
+    public static String currentHistoryId="";
 
 }

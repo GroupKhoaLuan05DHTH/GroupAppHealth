@@ -50,7 +50,6 @@ public class RecyclerViewListClinicsAdapter extends RecyclerView.Adapter<Recycle
             public void onClick(View view) {
                 if (clinicsList.size() != 0) {
                     if (clinicsList.get(position).lat != 0 && clinicsList.get(position).lng != 0) {
-//                        mMap.addMarker(new MarkerOptions().position(new LatLng(clinicsList.get(position).lat, clinicsList.get(position).lng)).title(clinicsList.get(position).name));
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(clinicsList.get(position).lat, clinicsList.get(position).lng), 16.0f));
                     }
                 } else {

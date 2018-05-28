@@ -15,6 +15,9 @@
     <string name="title_setting_activity">Setting Activity</string>
     <string name="title_list_clinics">List Clinics</string>
     <string name="title_update_profile">Update Profile</string>
+    <string name="title_history_activity">History</string>
+    <string name="title_history_detail_activity">History Detail</string>
+    <string name="title_result_activity">Result</string>
 
     <string name="medical_profile">Medical Profile</string>
     <string name="list_clinics">List Clinics</string>

@@ -23,6 +23,7 @@ import com.example.truong.apphealth.Instance;
 import com.example.truong.apphealth.R;
 import com.example.truong.apphealth.Server.ApiInterface;
 import com.example.truong.apphealth.Server.Model.ListAccount;
+import com.example.truong.apphealth.Server.Model.ListHistory;
 import com.example.truong.apphealth.Server.RetrofitClient;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.ProfilePictureView;
@@ -74,10 +75,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         mLayoutListClinics.setOnClickListener(this);
         mLayoutMedicalKnowledge.setOnClickListener(this);
         mLayoutHistory.setOnClickListener(this);
-//        if (Instance.profile.size() != 0) {
+        if (Instance.profile.size() != 0) {
+            apiGetHistory(Instance.profile.get(0).ID);
+
 //            apigetProfile(Instance.profile.get(0).ID);
-//        } else {
-//        }
+        } else {
+        }
     }
 
 
@@ -135,6 +138,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, MedicalKnowledgeActivity.class));
                 break;
             case R.id.nav_history:
+                startActivity(new Intent(this, HistoryActivity.class));
                 break;
             case R.id.nav_contact:
                 startActivity(new Intent(this, ContactActivity.class));
@@ -204,6 +208,27 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    private void apiGetHistory(String accoutId) {
+        Call<ListHistory> call = mApiService.getHistory(accoutId);
+        call.enqueue(new Callback<ListHistory>() {
+            @Override
+            public void onResponse(Response<ListHistory> response, Retrofit retrofit) {
+                if (response.isSuccess()) {
+                    Instance.resultList = response.body().result;
+                    Log.d("BBB", "onResponse: " + Instance.resultList.size());
+                } else {
+                    Log.d("BBB", "sai get history: ");
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.d("BBB", "onFailure: " + t.getMessage());
+            }
+        });
+
+    }
+
     private void apigetProfile(String AccountID) {
         Call<ListAccount> call = mApiService.getProfile(AccountID);
         call.enqueue(new Callback<ListAccount>() {
@@ -211,7 +236,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onResponse(Response<ListAccount> response, Retrofit retrofit) {
                 Instance.getProfile = response.body().result;
                 if (Instance.getProfile != null) {
-                    String address =Instance.getProfile.get(0).Address.replace(' ', '+');
+                    String address = Instance.getProfile.get(0).Address.replace(' ', '+');
                     new getListAsysncTask().execute("http://maps.google.com/maps/api/geocode/json?address=" + address);
 
                 } else {
@@ -239,6 +264,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, MedicalKnowledgeActivity.class));
                 break;
             case R.id.layout_history:
+                startActivity(new Intent(this, HistoryActivity.class));
                 break;
         }
     }
